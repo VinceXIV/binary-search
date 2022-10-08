@@ -52,9 +52,11 @@ def wordExists(testWord, dictionaryWordList=myDictionaryList):
 def CheckGrammarUsingBinarySearch(testWordList, dictionaryWordList=myDictionaryList):
     print("The following words were not found in the dictionary;")
 
+    index = 1
     for word in testWordList:
         if not wordExists(word):
-            print(word)
+            print(index, ". ", word)
+            index += 1
         else:
             continue
 
