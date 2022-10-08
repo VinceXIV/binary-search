@@ -17,7 +17,7 @@ def getInputWordArray(filePath):
     sanitizedWordList = re.sub(r'[^(a-z0-9)-?(a-z0-9)$]', ' ', theString)
 
     print("Your input contained the following words: ")
-    print(sanitizedWordList.split(" "))
+    print(sanitizedWordList.split())
     print("")
 
     return sanitizedWordList.split(" ")
