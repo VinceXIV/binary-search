@@ -14,30 +14,37 @@ def getInputWordArray(filePath):
     # 1. Remove all non-alphanumeric characters.
     # 2. Accept words such as "ice-cream" (words that have a hyphen) between two words
     # Note that we are not accepting words with a hyphen at the start or end
-    sanitizedWordList = re.sub(r'[^(a-zA-Z0-9)-?(a-zA-Z0-9)$]', ' ', theString)
+    sanitizedWordList = re.sub(r'[^(a-z0-9)-?(a-z0-9)$]', ' ', theString)
 
-    return sanitizedWordList.split()
+    print("Your input contained the following words: ")
+    print(sanitizedWordList.split(" "))
+    print("")
+
+    return sanitizedWordList.split(" ")
 
 
 # IMPLEMENTATION GRAMMAR CHECK USING BINARY SEARCH
 
 myDictionaryList = Path('./dictionary.txt').read_text().lower().split("\n")
-print(myDictionaryList)
 
 def wordExists(testWord, dictionaryWordList=myDictionaryList):
-    rangeToCheck = {"start": 0, "end": len(dictionaryWordList)-1}   
+    searchRange = {"start": 0, "end": len(dictionaryWordList)-1}   
 
-    while rangeToCheck["start"] <= rangeToCheck["end"]:
-        midPoint = int((rangeToCheck["end"] + rangeToCheck["start"])/2)
+    while searchRange["start"] <= searchRange["end"]:
+        midPoint = int((searchRange["end"] + searchRange["start"])/2)
         midWord = dictionaryWordList[midPoint]
+
+        # print("search range. Start: ", searchRange["start"], " end: ", searchRange["end"])
+        # print("midpoint: ", midPoint, " midWord: ", midWord)
+        # print("")
 
         if midWord == testWord:
             return True
         elif midWord < testWord:
-            rangeToCheck["start"] = midPoint + 1
+            searchRange["start"] = midPoint + 1
 
         elif midWord > testWord:
-            rangeToCheck["end"] = midPoint -1
+            searchRange["end"] = midPoint -1
     
     return False
 
